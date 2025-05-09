@@ -1,0 +1,10 @@
+.next/
+node_modules
+target
+yarn-error.log
+
+
+.next/cache
+.next/server
+.next/static
+.next/types
