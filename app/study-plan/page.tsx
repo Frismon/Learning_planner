@@ -12,7 +12,7 @@ export default function StudyPlanPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-3 pt-0">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Навчальні плани</h1>
           <AddStudyPlan onPlanAdded={handlePlanAdded} />
