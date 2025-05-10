@@ -1,6 +1,6 @@
 "use client"
-import { StudyPlan } from "@/components/StudyPlan";
 import { AddStudyPlan } from "@/components/AddStudyPlan";
+import { StudyPlan } from "@/components/StudyPlan";
 import { useState } from "react";
 
 export default function StudyPlanPage() {
