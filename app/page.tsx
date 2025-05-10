@@ -6,12 +6,10 @@ import type { Task } from "@/lib/types"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function Home() {
-  // Fetch tasks from backend
   let tasks: Task[] = []
   try {
     tasks = await fetchTasks()
   } catch (e) {
-    // handle error if needed
   }
   const completedTasks = tasks.filter(task => task.completed)
   const totalTasks = tasks.length
@@ -121,20 +119,7 @@ export default async function Home() {
           </Button>
         </div>
       </div>
-<<<<<<< HEAD
-
-      <div className="flex justify-end mt-8">
-        <Button asChild className="rounded-xl px-6 py-3 text-lg font-bold shadow-lg">
-          <Link href="/add-plan">
-            <PlusCircle className="mr-2 h-5 w-5" />
-            Додати навчальний план
-          </Link>
-        </Button>
-      </div>
     </div>
-=======
-      </div>
->>>>>>> 675f89b (added UI for study-plan)
   )
 }
 
