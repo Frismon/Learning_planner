@@ -121,6 +121,7 @@ export default async function Home() {
           </Button>
         </div>
       </div>
+<<<<<<< HEAD
 
       <div className="flex justify-end mt-8">
         <Button asChild className="rounded-xl px-6 py-3 text-lg font-bold shadow-lg">
@@ -131,6 +132,9 @@ export default async function Home() {
         </Button>
       </div>
     </div>
+=======
+      </div>
+>>>>>>> 675f89b (added UI for study-plan)
   )
 }
 

@@ -2,6 +2,18 @@
 node_modules
 target
 yarn-error.log
+<<<<<<< HEAD
+=======
+
+
+.next/cache
+.next/server
+.next/static
+.next/types
+
+# Compiled class file
+*.class
+>>>>>>> 675f89b (added UI for study-plan)
 
 
 .next/cache
