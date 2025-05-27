@@ -40,17 +40,17 @@ export default function AddTasksPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Prepare payload for backend (priority in uppercase, status if needed)
+
     const payload = {
       ...formData,
-      priority: formData.priority.toUpperCase(), // Java expects 'MEDIUM', 'HIGH', 'LOW'
+      priority: formData.priority.toUpperCase(), 
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      // status: "PENDING", // Uncomment if backend expects this field
+  
     };
 
     try {
-      await createTask(payload as any); // Cast as any to avoid TS error, backend expects uppercase
+      await createTask(payload as any); 
       toast({
         title: "Завдання створено",
         description: "Ваше завдання було успішно додано.",

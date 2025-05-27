@@ -40,7 +40,6 @@ public class TaskController {
             try {
                 taskStatus = Task.TaskStatus.valueOf(status.toUpperCase());
             } catch (IllegalArgumentException e) {
-                // handle invalid status, можна повернути 400 або просто всі
             }
         }
         List<Task> tasks = taskService.getAllTasks(taskStatus);

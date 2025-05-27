@@ -39,7 +39,7 @@ public class CalendarEvent {
     private User user;
 
     private boolean isRecurring = false;
-    private String recurrenceRule; // RRULE format for recurring events
+    private String recurrenceRule; 
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();

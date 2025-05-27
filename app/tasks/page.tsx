@@ -40,7 +40,6 @@ export default function TasksPage() {
         )
       )
     } catch (e) {
-      // Можна показати toast з помилкою
     } finally {
       setIsLoading(false)
     }

@@ -1,12 +1,10 @@
-// Replace the entire file with this real API client
+
 
 import type { Task, CalendarEvent, LearningPlan } from "./types"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
 
-// Helper function for API requests
 async function apiRequest<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  // Видаляємо початковий слеш, якщо він є
   const cleanEndpoint = endpoint.replace(/^\/+/g, "");
   const response = await fetch(`${API_URL}/${cleanEndpoint}`, {
     headers: {
@@ -24,7 +22,7 @@ async function apiRequest<T>(endpoint: string, options?: RequestInit): Promise<T
   return response.json();
 }
 
-// Tasks API
+
 export async function fetchTasks(): Promise<Task[]> {
   return apiRequest<Task[]>("tasks")
 }
@@ -53,7 +51,6 @@ export async function deleteTask(id: string): Promise<void> {
   })
 }
 
-// Calendar Events API
 export async function fetchCalendarEvents(startDate?: Date, endDate?: Date): Promise<CalendarEvent[]> {
   let url = "calendar-events"
 
@@ -88,7 +85,6 @@ export async function deleteEvent(id: string): Promise<void> {
   })
 }
 
-// Learning Plans API
 export async function fetchLearningPlans(): Promise<LearningPlan[]> {
   return apiRequest<LearningPlan[]>("learning-plans")
 }

@@ -58,7 +58,6 @@ export default function CalendarPage() {
     const firstDay = new Date(year, month, 1)
     const lastDay = new Date(year, month + 1, 0)
 
-    // Adjust first day to start from Monday (1) instead of Sunday (0)
     let dayOfWeek = firstDay.getDay() || 7
     dayOfWeek = dayOfWeek - 1
 
@@ -67,7 +66,6 @@ export default function CalendarPage() {
     const weeks = []
     let days = []
 
-    // Add previous month days
     for (let i = 0; i < dayOfWeek; i++) {
       const prevMonthDay = new Date(year, month, -dayOfWeek + i + 1)
       days.push({
@@ -77,7 +75,7 @@ export default function CalendarPage() {
       })
     }
 
-    // Add current month days
+ 
     for (let i = 1; i <= daysInMonth; i++) {
       const currentDate = new Date(year, month, i)
       days.push({
@@ -92,7 +90,6 @@ export default function CalendarPage() {
       }
     }
 
-    // Add next month days
     if (days.length > 0) {
       const daysToAdd = 7 - days.length
       for (let i = 1; i <= daysToAdd; i++) {
@@ -110,8 +107,8 @@ export default function CalendarPage() {
   }
 
   const getWeekData = (date: Date) => {
-    const currentDay = date.getDay() || 7 // Convert Sunday (0) to 7
-    const diff = date.getDate() - currentDay + 1 // Adjust to Monday
+    const currentDay = date.getDay() || 7 
+    const diff = date.getDate() - currentDay + 1 
 
     const weekStart = new Date(date)
     weekStart.setDate(diff)
@@ -135,7 +132,6 @@ export default function CalendarPage() {
     const hours = []
 
     for (let i = 8; i < 20; i++) {
-      // 8 AM to 8 PM
       const hourDate = new Date(date)
       hourDate.setHours(i, 0, 0, 0)
 
@@ -163,10 +159,9 @@ export default function CalendarPage() {
         due.getDate() === date.getDate() &&
         due.getMonth() === date.getMonth() &&
         due.getFullYear() === date.getFullYear() &&
-        !task.completed // показувати лише активні
+        !task.completed 
       )
     })
-    // Приводимо завдання до формату event-like
     const mappedTasks = dayTasks.map(task => {
       const start = new Date(task.dueDate);
       const end = new Date(start.getTime() + (task.estimatedTime || 60) * 60000);
@@ -271,7 +266,6 @@ export default function CalendarPage() {
     }
   }
 
-  // Helper for task color
   const getTaskColor = (priority: string) => {
     switch (priority?.toLowerCase()) {
       case "high":
