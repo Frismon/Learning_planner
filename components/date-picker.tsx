@@ -1,32 +1,44 @@
 "use client"
-import { format } from "date-fns"
-import { uk } from "date-fns/locale"
-import { CalendarIcon } from "lucide-react"
+import dayjs from "dayjs"
+import "dayjs/locale/uk"
+import { Calendar as CalendarIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
+dayjs.locale("uk")
+
 interface DatePickerProps {
-  date: Date
-  setDate: (date: Date) => void
+  date: Date | undefined
+  onSelect: (date: Date | undefined) => void
+  className?: string
 }
 
-export function DatePicker({ date, setDate }: DatePickerProps) {
+export function DatePicker({ date, onSelect, className }: DatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
-          className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}
+          className={cn(
+            "w-[280px] justify-start text-left font-normal",
+            !date && "text-muted-foreground",
+            className
+          )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP", { locale: uk }) : <span>Виберіть дату</span>}
+          {date ? dayjs(date).format("D MMMM YYYY") : <span>Виберіть дату</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={(date) => date && setDate(date)} initialFocus locale={uk} />
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={onSelect}
+          initialFocus
+        />
       </PopoverContent>
     </Popover>
   )

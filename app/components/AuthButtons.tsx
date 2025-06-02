@@ -1,36 +1,45 @@
 'use client';
 
-import { useAuth } from '../contexts/AuthContext';
-import Link from 'next/link';
+import { useAuth } from '@/app/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
-export function AuthButtons() {
-  const { isAuthenticated, logout } = useAuth();
+export default function AuthButtons() {
+  const { user, logout } = useAuth();
+  const router = useRouter();
 
-  return (
-    <div className="flex items-center gap-4">
-      {isAuthenticated ? (
+  const handleLogout = async () => {
+    await logout();
+    router.push('/login');
+  };
+
+  if (user) {
+    return (
+      <div className="flex items-center space-x-4">
+        <span className="text-gray-600">{user.email}</span>
         <button
-          onClick={logout}
-          className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          onClick={handleLogout}
+          className="btn btn-danger"
         >
           Вийти
         </button>
-      ) : (
-        <>
-          <Link
-            href="/login"
-            className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-          >
-            Увійти
-          </Link>
-          <Link
-            href="/register"
-            className="bg-indigo-600 text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
-            Зареєструватися
-          </Link>
-        </>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center space-x-4">
+      <button
+        onClick={() => router.push('/login')}
+        className="btn btn-primary"
+      >
+        Увійти
+      </button>
+      <button
+        onClick={() => router.push('/register')}
+        className="btn btn-secondary"
+      >
+        Зареєструватися
+      </button>
     </div>
   );
 } 

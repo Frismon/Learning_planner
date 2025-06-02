@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { fetchCalendarEvents, fetchTasks } from "@/lib/api"
 import type { CalendarEvent, Task } from "@/lib/types"
 import BackButton from "@/components/BackButton"
+import EventForm from "@/app/components/EventForm"
 
 export default function CalendarPage() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -34,6 +35,10 @@ export default function CalendarPage() {
     }
     loadData()
   }, [])
+
+  const handleEventCreated = (newEvent: CalendarEvent) => {
+    setEvents(prevEvents => [...prevEvents, newEvent])
+  }
 
   const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"]
   const months = [
@@ -428,9 +433,23 @@ export default function CalendarPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-        <div className="container mx-auto px-4 py-8">
-        <BackButton />
-      <h1 className="text-3xl font-bold mb-6">Розклад</h1>
+      <BackButton />
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold">Календар</h1>
+        <div className="flex items-center space-x-4">
+          <EventForm onEventCreated={handleEventCreated} />
+          <Select value={view} onValueChange={(value: "month" | "week" | "day") => setView(value)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Виберіть вид" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="month">Місяць</SelectItem>
+              <SelectItem value="week">Тиждень</SelectItem>
+              <SelectItem value="day">День</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
 
       <Card>
         <CardHeader>
@@ -446,16 +465,6 @@ export default function CalendarPage() {
               <Button variant="outline" size="icon" onClick={navigateNext}>
                 <ChevronRight className="h-4 w-4" />
               </Button>
-              <Select value={view} onValueChange={(value: "month" | "week" | "day") => setView(value)}>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Вигляд" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="month">Місяць</SelectItem>
-                  <SelectItem value="week">Тиждень</SelectItem>
-                  <SelectItem value="day">День</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
           <CardDescription>Перегляд та керування вашим навчальним розкладом</CardDescription>
@@ -474,7 +483,6 @@ export default function CalendarPage() {
           )}
         </CardContent>
       </Card>
-    </div>
     </div>
   )
 }

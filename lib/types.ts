@@ -9,6 +9,9 @@ export interface Task {
   updatedAt: string
   priority: "high" | "medium" | "low"
   estimatedTime: number
+  notes?: string
+  reminder?: string
+  isReminderSent?: boolean
 }
 
 export interface CalendarEvent {
@@ -29,4 +32,5 @@ export interface LearningPlan {
   endDate: string
   progress: number
   priority: "high" | "medium" | "low"
+  notes?: string
 }

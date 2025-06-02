@@ -51,8 +51,11 @@ export default async function Home() {
                 <span className="text-base font-medium">Виконано завдань</span>
                 <span className="text-base font-semibold">{completedTasks.length} / {totalTasks}</span>
               </div>
-              <div className="w-full bg-secondary h-3 rounded-full">
-                <div className="bg-primary h-3 rounded-full transition-all duration-500" style={{ width: `${percent}%` }}></div>
+              <div className="w-full bg-gray-200 rounded-full h-2.5">
+                <div
+                  className="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+                  style={{ width: `${totalTasks > 0 ? (completedTasks.length / totalTasks) * 100 : 0}%` }}
+                ></div>
               </div>
             </div>
             <div className="flex items-center justify-between mb-2">

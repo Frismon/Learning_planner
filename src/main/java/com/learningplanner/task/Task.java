@@ -41,6 +41,12 @@ public class Task {
 
     private TaskStatus status = TaskStatus.PENDING;
 
+    private String notes;
+
+    private LocalDateTime reminder;
+
+    private boolean isReminderSent = false;
+
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 

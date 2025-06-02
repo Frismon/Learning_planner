@@ -37,6 +37,8 @@ public class LearningPlan {
 
     private LearningPlanStatus status = LearningPlanStatus.ACTIVE;
 
+    private String notes;
+
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 }

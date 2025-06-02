@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { fetchLearningPlanById } from '@/lib/api';
 import { LearningPlan } from '@/lib/types';
-import { format } from 'date-fns';
-import { uk } from 'date-fns/locale';
+import dayjs from 'dayjs';
+import 'dayjs/locale/uk';
+
+dayjs.locale('uk');
 
 interface ViewStudyPlanProps {
   planId: string;
@@ -71,11 +73,11 @@ export function ViewStudyPlan({ planId }: ViewStudyPlanProps) {
           <div className="space-y-2">
             <div className="flex justify-between">
               <span className="text-gray-600">Початок:</span>
-              <span>{format(new Date(plan.startDate), 'd MMMM yyyy', { locale: uk })}</span>
+              <span>{dayjs(plan.startDate).format('D MMMM YYYY')}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Кінець:</span>
-              <span>{format(new Date(plan.endDate), 'd MMMM yyyy', { locale: uk })}</span>
+              <span>{dayjs(plan.endDate).format('D MMMM YYYY')}</span>
             </div>
           </div>
         </div>
@@ -100,6 +102,11 @@ export function ViewStudyPlan({ planId }: ViewStudyPlanProps) {
       <div className="bg-gray-50 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Категорія</h3>
         <p className="text-gray-600">{plan.category}</p>
+      </div>
+
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold">Нотатки</h3>
+        <p className="text-gray-700">{plan.notes || "Немає нотаток"}</p>
       </div>
     </div>
   );

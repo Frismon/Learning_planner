@@ -98,4 +98,10 @@ public class TaskController {
         taskService.deleteTask(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/check-reminders")
+    public ResponseEntity<Void> checkReminders() {
+        taskService.checkAndSendReminders();
+        return ResponseEntity.ok().build();
+    }
 }

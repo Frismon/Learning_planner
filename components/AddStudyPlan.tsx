@@ -11,13 +11,15 @@ interface AddStudyPlanProps {
 
 export function AddStudyPlan({ onPlanAdded }: AddStudyPlanProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    startDate: '',
-    endDate: '',
-    priority: 'medium' as Priority,
-    category: '',
+  const [formData, setFormData] = useState<Omit<LearningPlan, "id">>({
+    title: "",
+    description: "",
+    category: "",
+    startDate: new Date().toISOString(),
+    endDate: new Date().toISOString(),
+    progress: 0,
+    priority: "medium",
+    notes: ""
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,27 +31,37 @@ export function AddStudyPlan({ onPlanAdded }: AddStudyPlanProps) {
 
     try {
       await createLearningPlan({
-        ...formData,
-        startDate: formData.startDate ? formData.startDate + 'T00:00:00' : '',
-        endDate: formData.endDate ? formData.endDate + 'T00:00:00' : '',
-        progress: 0,
+        title: formData.title,
+        description: formData.description,
+        category: formData.category,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        progress: formData.progress,
+        priority: formData.priority,
+        notes: formData.notes
       });
       setIsOpen(false);
       setFormData({
-        title: '',
-        description: '',
-        startDate: '',
-        endDate: '',
-        priority: 'medium',
-        category: '',
+        title: "",
+        description: "",
+        category: "",
+        startDate: new Date().toISOString(),
+        endDate: new Date().toISOString(),
+        progress: 0,
+        priority: "medium",
+        notes: ""
       });
       onPlanAdded();
-    } catch (err) {
-      setError('Помилка при створенні навчального плану');
-      console.error(err);
+    } catch (error) {
+      console.error("Error creating learning plan:", error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -131,6 +143,17 @@ export function AddStudyPlan({ onPlanAdded }: AddStudyPlanProps) {
                   <option value="medium">Середній</option>
                   <option value="high">Високий</option>
                 </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Нотатки</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  rows={3}
+                />
               </div>
               <div className="flex justify-end space-x-3 mt-6">
                 <button

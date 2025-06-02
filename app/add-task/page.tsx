@@ -24,9 +24,11 @@ export default function AddTasksPage() {
     completed: false,
     dueDate: new Date().toISOString(),
     priority: "medium",
-    estimatedTime: 60,
-    createdAt: "",
-    updatedAt: ""
+    estimatedTime: 0,
+    notes: "",
+    reminder: "",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   });
 
   const handleChange = (field: string, value: any) => {
@@ -148,6 +150,30 @@ export default function AddTasksPage() {
                 value={formData.estimatedTime}
                 onChange={(e) => handleChange("estimatedTime", parseInt(e.target.value))}
                 required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Нотатки</label>
+              <textarea
+                id="notes"
+                name="notes"
+                value={formData.notes}
+                onChange={(e) => handleChange("notes", e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                rows={3}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="reminder" className="block text-sm font-medium text-gray-700">Нагадування</label>
+              <input
+                id="reminder"
+                name="reminder"
+                type="datetime-local"
+                value={formData.reminder}
+                onChange={(e) => handleChange("reminder", e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </CardContent>
